@@ -2,3 +2,14 @@ body {
   margin: 0;
   padding: 0;
 }
+
+nav a {
+  display: block;
+  text-decoration: none;
+  padding: .2em 1em;
+  color: #000;
+}
+
+nav a:hover {
+  background-color: aqua;
+}

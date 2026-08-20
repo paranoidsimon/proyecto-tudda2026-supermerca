@@ -4,6 +4,6 @@ export default function Footer() {
       backgroundColor: 'yellow',
     }}
   >
-    Footer
+    Sistema desarrollado por Ing. Fabian Lucena
   </footer>;
 }
