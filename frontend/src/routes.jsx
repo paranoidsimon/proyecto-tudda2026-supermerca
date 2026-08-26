@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
+import User from './pages/User';
 
 const routes = [
   {
@@ -23,6 +24,10 @@ const routes = [
       {
         path: '/login',
         element: <Login />,
+      },
+      {
+        path: '/User',
+        element: <User />,
       },
       {
         path: '*',

@@ -15,6 +15,6 @@ export default function Menu({visible = true}) {
     <MenuItem to="/">Inicio</MenuItem>
     <MenuItem to="/login">Login</MenuItem>
     <MenuItem to="/about">Acerca de</MenuItem>
-    <MenuItem to="/otra" >Otra cosa</MenuItem>
+    <MenuItem to="/User" >Agregar Usuario</MenuItem>
   </nav>;
 }
