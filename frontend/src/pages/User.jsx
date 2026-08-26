@@ -16,6 +16,9 @@ export default function User() {
 
   function submitHandler(event) {
     event.preventDefault();
+    if (!data.email.includes("@")) {
+      console.log("El correo electrónico no es válido");
+    }
     console.log(data);
   }
 
