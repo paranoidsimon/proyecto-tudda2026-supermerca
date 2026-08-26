@@ -1,9 +1,10 @@
-export default function Header() {
+export default function Header({onClickMenu}) {
   return <header
     style={{
       backgroundColor: 'pink',
     }}
   >
-    Header
+    <img src="/menu.svg" alt="Menu" width={25} onClick={onClickMenu}/>
+    Titulo de la pagina
   </header>;
 }

@@ -1,6 +1,7 @@
+import { useLocation } from 'react-router-dom';
 import MenuItem from './MenuItem';
 
-export default function Menu() {
+export default function Menu({visible = true}) {
   const location = useLocation();
 
   console.log(location.pathname);
@@ -8,6 +9,7 @@ export default function Menu() {
   return <nav
     style={{
       backgroundColor: 'lightblue',
+      display: visible ? '' : 'none',
     }}
   >
     <MenuItem to="/">Inicio</MenuItem>

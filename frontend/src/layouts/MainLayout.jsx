@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Menu from '../components/Menu';
@@ -5,6 +6,11 @@ import Menu from '../components/Menu';
 export default function MainLayout({
   children,
 }) {
+  const [menuVisible, setMenuVisible] = useState(true);
+
+
+  
+
   return <div
     style={{
       display: 'flex',
@@ -12,7 +18,10 @@ export default function MainLayout({
       minHeight: '100vh',
     }}
   >
-    <Header />
+    <Header 
+      //si hago click en icono menu llama al menu y cambia el estado de menuVisible
+      onClickMenu={() => setMenuVisible(!menuVisible)}
+    />
     
     <div
       className="body"
@@ -22,7 +31,7 @@ export default function MainLayout({
         flexDirection: 'row',
       }}
     >
-      <Menu />
+      <Menu visible={menuVisible}/>
 
       <main
         style={{
