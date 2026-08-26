@@ -1,14 +1,18 @@
-import { Link } from 'react-router-dom';
+import MenuItem from './MenuItem';
 
 export default function Menu() {
+  const location = useLocation();
+
+  console.log(location.pathname);
+
   return <nav
     style={{
       backgroundColor: 'lightblue',
     }}
   >
-    <Link to="/">Inicio</Link>
-    <Link to="/login">Login</Link>
-    <Link to="/about">Acerca de</Link>
-    <Link to="/otra">Otra cosa</Link>
+    <MenuItem to="/">Inicio</MenuItem>
+    <MenuItem to="/login">Login</MenuItem>
+    <MenuItem to="/about">Acerca de</MenuItem>
+    <MenuItem to="/otra" >Otra cosa</MenuItem>
   </nav>;
 }
