@@ -1,5 +1,6 @@
 import { getDependency } from '../dependency.js';
 import bcrypt from 'bcrypt';
+import { httpError } from '../utils/http_error.js';
 
 export class LoginService {
   constructor() {
@@ -8,19 +9,21 @@ export class LoginService {
   }
 
   async login(data) {
-    if (!data.username)
-      throw new Error('El nombre de usuario es obligatorio');
+    if (!data || typeof data !== 'object' || Array.isArray(data))
+      throw httpError(400, 'Los datos de inicio de sesión no son válidos');
+    if (typeof data.username !== 'string' || !data.username.trim())
+      throw httpError(400, 'El nombre de usuario es obligatorio');
 
-    if (!data.password)
-      throw new Error('La contraseña es obligatoria');
+    if (typeof data.password !== 'string' || !data.password)
+      throw httpError(400, 'La contraseña es obligatoria');
 
     const user = await this.userService.getByUsername(data.username);
     if (!user)
-      throw new Error('Usuario o contraseña incorrectos');
+      throw httpError(401, 'Usuario o contraseña incorrectos');
 
     const isMatch = await bcrypt.compare(data.password, user.password);
     if (!isMatch)
-      throw new Error('Usuario o contraseña incorrectos');
+      throw httpError(401, 'Usuario o contraseña incorrectos');
 
     const session = await this.sessionService.createForUser(user);
 

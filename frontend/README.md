@@ -1,16 +1,19 @@
-# React + Vite
+# Supermerca - frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Interfaz React/Vite conectada al backend Express a través del contexto `ApiProvider` (`src/services/useApi.jsx`).
 
-Currently, two official plugins are available:
+## Desarrollo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+1. Inicia MongoDB y configura/inicia el backend según `../backend/readme.md`.
+2. Desde `frontend`, instala dependencias con `npm install`.
+3. Ejecuta `npm run dev`; la API apunta a `http://localhost:3000/api`.
+4. Verifica cambios con `npm run lint` y `npm run build`.
 
-## React Compiler
+## Recorridos por rol
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Público: explorar y buscar en el catálogo, crear una cuenta de cliente e iniciar sesión.
+- Cliente: agregar o quitar productos del carrito, confirmar pedidos sin pago en línea y consultar sus pedidos.
+- Vendedor: gestionar productos e inventario y actualizar el estado de los pedidos.
+- Administrador: administrar usuarios y asignar los roles `admin`, `seller` o `customer`; también puede gestionar productos y pedidos.
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+Los permisos efectivos se validan en el backend; ocultar o mostrar enlaces en esta interfaz es solo una ayuda de navegación.

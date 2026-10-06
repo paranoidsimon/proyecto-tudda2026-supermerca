@@ -24,7 +24,7 @@ export class SessionService {
     const session = {
       username: user.username,
       authorizationToken,
-      role: user.role,
+      role: user.role === 'user' ? 'customer' : user.role,
       open: new Date().toISOString(),
     };
 

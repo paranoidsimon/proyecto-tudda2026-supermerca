@@ -6,6 +6,10 @@ import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import Users from './pages/Users';
 import User from './pages/User';
+import Register from './pages/Register';
+import Products from './pages/Products';
+import Cart from './pages/Cart';
+import Orders from './pages/Orders';
 
 const routes = [
   {
@@ -25,6 +29,22 @@ const routes = [
       {
         path: '/login',
         element: <Login />,
+      },
+      {
+        path: '/register',
+        element: <Register />,
+      },
+      {
+        path: '/cart',
+        element: <Cart />,
+      },
+      {
+        path: '/orders',
+        element: <Orders />,
+      },
+      {
+        path: '/products/manage',
+        element: <Products />,
       },
       {
         path: '/users',

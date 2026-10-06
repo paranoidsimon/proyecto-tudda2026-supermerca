@@ -5,11 +5,16 @@ export const GlobalContext = createContext();
 export function GlobalProvider({ children }) {
   const [username, setUsername] = useState(null);
   const [role, setRole] = useState(null);
+  const clearSession = () => {
+    setUsername(null);
+    setRole(null);
+  };
 
   return <GlobalContext.Provider
     value={{
       username, setUsername,
       role, setRole,
+      clearSession,
     }}
   >
     {children}

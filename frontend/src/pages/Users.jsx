@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import useUser from '../services/useUser';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export default function Users() {
   const navigate = useNavigate();
@@ -9,8 +10,12 @@ export default function Users() {
   const [list, setList] = useState([]);
 
   async function loadList() {
-    const res = await getUsers();
-    setList(res);
+    try {
+      const res = await getUsers();
+      setList(res);
+    } catch (error) {
+      toast.error(error.message || 'No se pudieron cargar los usuarios');
+    }
   }
 
   useEffect(() => {
@@ -31,8 +36,13 @@ export default function Users() {
     });
 
     if (result.isConfirmed) {
-      await deleteUser(username);
-      await loadList();
+      try {
+        await deleteUser(username);
+        await loadList();
+        toast.success('Usuario eliminado correctamente');
+      } catch (error) {
+        toast.error(error.message || 'No se pudo eliminar el usuario');
+      }
     }
   };
 

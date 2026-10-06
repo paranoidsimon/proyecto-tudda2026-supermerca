@@ -19,10 +19,21 @@ export default function User() {
     displayName: '',
     email: '',
     password: '',
-    role: 'user',
+    role: 'customer',
   });
 
   useEffect(() => {
+    if (!username) {
+      setData({
+        username: '',
+        displayName: '',
+        email: '',
+        password: '',
+        role: 'customer',
+      });
+      return;
+    }
+
     getUser(username)
       .then(userData => setData(userData))
       .catch(err => toast.error(err?.message || 'Error al cargar los datos del usuario'));
@@ -32,18 +43,21 @@ export default function User() {
   async function submitHandler(e) {
     e.preventDefault();
 
-    if (!data.email.includes('@')) {
-      alert('El correo electrónico no es válido');
-      return;
+    try {
+      if (!data.email.includes('@')) {
+        toast.error('El correo electrónico no es válido');
+        return;
+      }
+      if (username)
+        await updateUser(username, data);
+      else
+        await addUser(data);
+
+      toast.success(`Usuario ${username ? 'modificado' : 'agregado'} correctamente`);
+      navigate('/users');
+    } catch (error) {
+      toast.error(error.message || 'No se pudo guardar el usuario');
     }
-
-    if (username)
-      await updateUser(username, data);
-    else
-      await addUser(data);
-
-    toast.success(`Usuario ${username ? 'modificado' : 'agregado'} correctamente`);
-    navigate('/users');
   }
 
   return <Form
@@ -57,6 +71,7 @@ export default function User() {
       value={data.username}
       onChange={newValue => setData(data => ({ ...data, username: newValue }))}
       required
+      disabled={Boolean(username)}
     />
     <TextField
       label="Nombre completo:"
@@ -81,7 +96,8 @@ export default function User() {
       value={data.role}
       onChange={newValue => setData(data => ({ ...data, role: newValue }))}
       options={[
-        { value: 'user', label: 'Usuario' },
+        { value: 'customer', label: 'Cliente' },
+        { value: 'seller', label: 'Vendedor' },
         { value: 'admin', label: 'Administrador' },
       ]}
       required

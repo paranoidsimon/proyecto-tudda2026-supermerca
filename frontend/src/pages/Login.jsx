@@ -33,7 +33,7 @@ export default function Login() {
       navigate('/');
     } catch (error) {
       console.error(error);
-      toast.error('Error en el login.');
+      toast.error(error.message || 'Error en el login.');
     }
 
     setDisabled(false);

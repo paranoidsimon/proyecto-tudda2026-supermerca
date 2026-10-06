@@ -33,13 +33,22 @@ export function ApiProvider({ children }) {
       ...options,
     });
 
-    if (!res.ok)
-      throw new Error(`Error en la petición: ${res.status} ${res.statusText}`);
+    if (!res.ok) {
+      let message = `Error en la petición: ${res.status} ${res.statusText}`;
+      try {
+        const payload = await res.json();
+        if (payload.error)
+          message = payload.error;
+      } catch {
+        // Keep the HTTP status message when the server does not return JSON.
+      }
+      throw new Error(message);
+    }
 
-    if (options.json)
+    if (options.json && res.status !== 204)
       return await res.json();
 
-    return await res.text();
+    return options.json ? null : await res.text();
   }
 
   async function post(url, body) {
@@ -82,6 +91,15 @@ export function ApiProvider({ children }) {
     });
   }
 
+  async function putJson(url, body, options = {}) {
+    return await request(url, {
+      method: 'PUT',
+      body,
+      json: true,
+      ...options,
+    });
+  }
+
   return <ApiContext.Provider
     value={{
       urlBase,
@@ -93,6 +111,7 @@ export function ApiProvider({ children }) {
       getJson,
       deleteJson,
       patchJson,
+      putJson,
     }}
   >
     {children}

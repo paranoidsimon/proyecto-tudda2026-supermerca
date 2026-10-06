@@ -9,5 +9,6 @@ export default function useUser() {
     deleteUser: (username, options) => api.deleteJson(`/users/${username}`, options),
     updateUser: (username, data, options) => api.patchJson(`/users/${username}`, data, options),
     addUser: (data, options) => api.postJson('/users', data, options),
+    register: (data, options) => api.postJson('/register', data, options),
   }
 }

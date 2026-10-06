@@ -8,6 +8,7 @@ export default function Form({
   disabled = false
 }) {
   return <form
+    className="standard-form"
     onSubmit={onSubmit}
   >
     {title && <h3>{title}</h3>}
